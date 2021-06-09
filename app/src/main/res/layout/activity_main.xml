@@ -10,36 +10,30 @@
         android:id="@+id/rvTasks"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_marginTop="10dp"
-        app:layout_constraintBottom_toTopOf="@+id/edEnter"
+        app:layout_constraintBottom_toTopOf="@+id/addButton"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <EditText
-        android:id="@+id/edEnter"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:hint="Enter Task"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/addButton"
-        app:layout_constraintStart_toStartOf="parent" />
-
     <Button
         android:id="@+id/addButton"
-        android:backgroundTint="@color/black"
         android:layout_width="wrap_content"
         android:layout_height="50dp"
-        android:text="Add"
+        android:layout_marginEnd="92dp"
+        android:layout_marginBottom="4dp"
+        android:backgroundTint="@color/black"
+        android:text="Add Task"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/removeButton" />
 
     <Button
         android:id="@+id/removeButton"
-        android:backgroundTint="@color/black"
         android:layout_width="wrap_content"
         android:layout_height="50dp"
+        android:layout_marginEnd="32dp"
+        android:layout_marginBottom="4dp"
+        android:backgroundTint="@color/black"
         android:text="Remove Done"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />

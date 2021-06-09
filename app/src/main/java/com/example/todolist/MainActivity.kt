@@ -19,12 +19,8 @@ class MainActivity : AppCompatActivity() {
         rvTasks.layoutManager = LinearLayoutManager(this)
 
         addButton.setOnClickListener{
-            val title = edEnter.text.toString()
-            if(!title.isEmpty()){
-                val task = Todo(title)
-                todoAdapter.add(task)
-                edEnter.text.clear()
-            }
+            val inputDialog = InputDialog(todoAdapter)
+            inputDialog.show(supportFragmentManager, "Task Input")
         }
 
         removeButton.setOnClickListener{
