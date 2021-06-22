@@ -26,7 +26,7 @@ class InputDialog(var todoAdapter: TodoAdapter): DialogFragment() {
             addButton.setOnClickListener{
                 val title = taskInput.text.toString()
                 if(!title.isEmpty()){
-                    val task = Todo(title)
+                    val task = Todo(title = title)
                     todoAdapter.add(task)
                     dismiss()
                 }
