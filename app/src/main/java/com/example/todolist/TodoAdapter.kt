@@ -41,9 +41,9 @@ class TodoAdapter( val db: DataBaseHelper): RecyclerView.Adapter<TodoAdapter.Tod
             cbDone.isChecked = curTask.isChecked
             toggleStrikeThrough(tvTask, cbDone.isChecked)
             cbDone.setOnCheckedChangeListener { _, isChecked ->
-                db.updateTask(curTask)
                 toggleStrikeThrough(tvTask, isChecked)
                 curTask.isChecked = !curTask.isChecked
+                db.updateTask(curTask)
             }
         }
     }

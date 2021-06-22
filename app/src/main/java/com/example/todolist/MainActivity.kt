@@ -1,5 +1,7 @@
 package com.example.todolist
 
+// BUG: After adding a task it can't be deleted from the database until the app isn't relaunched
+
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.recyclerview.widget.LinearLayoutManager

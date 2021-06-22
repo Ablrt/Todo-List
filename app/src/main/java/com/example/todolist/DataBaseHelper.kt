@@ -51,7 +51,8 @@ class DataBaseHelper(context: Context): SQLiteOpenHelper(context, "todo_list.db"
     }
 
     fun updateTask(task:Todo){
-        val sqlQuery = "UPDATE $todoTable SET $isActive = 1 WHERE id = ${task.id}"
+        val checked = if (task.isChecked)  1 else 0
+        val sqlQuery = "UPDATE $todoTable SET $isActive = $checked WHERE id = ${task.id}"
         val db = this.writableDatabase
         db.execSQL(sqlQuery)
     }
