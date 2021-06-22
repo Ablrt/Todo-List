@@ -9,16 +9,21 @@ import androidx.recyclerview.widget.RecyclerView
 import kotlinx.android.synthetic.main.task.view.*
 
 
-class TodoAdapter(private val tasks: MutableList<Todo>): RecyclerView.Adapter<TodoAdapter.TodoViewHolder>(){
+class TodoAdapter( val db: DataBaseHelper): RecyclerView.Adapter<TodoAdapter.TodoViewHolder>(){
+
+    private val tasks = db.getAll()
+
 
     class TodoViewHolder(itemView: View):RecyclerView.ViewHolder(itemView)
 
     fun add(task: Todo){
+        db.addOne(task)
         tasks.add(task)
         notifyItemInserted(tasks.size-1)
     }
 
     fun remove(){
+        db.deleteDone()
         tasks.removeAll{ task -> task.isChecked}
         notifyDataSetChanged()
     }
@@ -36,6 +41,7 @@ class TodoAdapter(private val tasks: MutableList<Todo>): RecyclerView.Adapter<To
             cbDone.isChecked = curTask.isChecked
             toggleStrikeThrough(tvTask, cbDone.isChecked)
             cbDone.setOnCheckedChangeListener { _, isChecked ->
+                db.updateTask(curTask)
                 toggleStrikeThrough(tvTask, isChecked)
                 curTask.isChecked = !curTask.isChecked
             }

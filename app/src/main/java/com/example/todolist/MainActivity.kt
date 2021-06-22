@@ -13,7 +13,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        todoAdapter = TodoAdapter(mutableListOf())
+        todoAdapter = TodoAdapter(DataBaseHelper(this))
 
         rvTasks.adapter = todoAdapter
         rvTasks.layoutManager = LinearLayoutManager(this)

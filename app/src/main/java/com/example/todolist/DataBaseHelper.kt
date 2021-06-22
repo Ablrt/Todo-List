@@ -25,7 +25,7 @@ class DataBaseHelper(context: Context): SQLiteOpenHelper(context, "todo_list.db"
         return len
     }
 
-    fun viewAll():MutableList<Todo>{
+    fun getAll():MutableList<Todo>{
         val tasks = mutableListOf<Todo>()
         val db = this.readableDatabase
         val SQLquery = "SELECT * FROM $todoTable"
@@ -44,12 +44,16 @@ class DataBaseHelper(context: Context): SQLiteOpenHelper(context, "todo_list.db"
         return tasks
     }
 
-    fun deleteOne(todo:Todo){
-        val SQLquery = "DELETE FROM $todoTable WHERE id = ${todo.id}"
+    fun deleteDone(){
         val db = this.writableDatabase
-        db.execSQL(SQLquery)
+        db.delete(todoTable, isActive, null)
         db.close()
+    }
 
+    fun updateTask(task:Todo){
+        val sqlQuery = "UPDATE $todoTable SET $isActive = 1 WHERE id = ${task.id}"
+        val db = this.writableDatabase
+        db.execSQL(sqlQuery)
     }
 
     override fun onUpgrade(p0: SQLiteDatabase?, p1: Int, p2: Int) {
