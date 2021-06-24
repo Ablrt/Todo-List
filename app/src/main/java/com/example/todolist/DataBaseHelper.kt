@@ -4,6 +4,8 @@ import android.content.ContentValues
 import android.content.Context
 import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
+import android.util.Log
+import android.widget.Toast
 
 class DataBaseHelper(context: Context): SQLiteOpenHelper(context, "todo_list.db", null, 1) {
     private val todoTable = "TODO_TABLE"
@@ -21,7 +23,12 @@ class DataBaseHelper(context: Context): SQLiteOpenHelper(context, "todo_list.db"
         cv.put(task, todo.title)
         cv.put(isActive, todo.isChecked)
         val len = db.insert(todoTable,null,cv)
+        val SQLquery = "SELECT * FROM $todoTable"
+        val cursor = db.rawQuery(SQLquery, null)
+        cursor.moveToLast()
+        val dbID = cursor.getInt(0)
         db.close()
+        todo.id = dbID
         return len
     }
 
@@ -51,10 +58,12 @@ class DataBaseHelper(context: Context): SQLiteOpenHelper(context, "todo_list.db"
     }
 
     fun updateTask(task:Todo){
-        val checked = if (task.isChecked)  1 else 0
-        val sqlQuery = "UPDATE $todoTable SET $isActive = $checked WHERE id = ${task.id}"
+        val checked = if (task.isChecked) 1 else 0
         val db = this.writableDatabase
-        db.execSQL(sqlQuery)
+        val cv = ContentValues()
+        cv.put(isActive, checked)
+        db.update(todoTable, cv, "id=?", arrayOf("${task.id}"))
+        db.close()
     }
 
     override fun onUpgrade(p0: SQLiteDatabase?, p1: Int, p2: Int) {

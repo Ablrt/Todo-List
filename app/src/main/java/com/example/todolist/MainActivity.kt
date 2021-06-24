@@ -1,6 +1,7 @@
 package com.example.todolist
 
-// BUG: After adding a task it can't be deleted from the database until the app isn't relaunched
+// TODO: Make id more secure
+// TODO: Fix the landscape mode bug
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
